@@ -1,29 +1,31 @@
 #!/usr/bin/python3
-""" This module containts an api request """
+"""Write a Python script that, using this REST API, for a given
+employee ID, returns information about his/her todo list progress"""
+
 
 if __name__ == "__main__":
 
     import requests
     from sys import argv
 
-    url_todos = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}/todos".format(argv[1]))
-    url_user = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}".format(argv[1]))
+    todos = requests.get("https://jsonplaceholder.typicode.com/users/{}/todos"
+                         .format(argv[1]))
+    data_user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                             .format(argv[1]))
 
-    task_complete = 0
+    task_done = 0
     all_tasks = 0
-    list_task_complete = []
+    task_done_list = []
 
-    for task in url_todos.json():
+    for task in todos.json():
         all_tasks += 1
         if task['completed'] is True:
-            task_complete += 1
-            list_task_complete.append(task['title'])
+            task_done += 1
+            task_done_list.append(task['title'])
 
-    employee_name = url_user.json()['name']
+    employee_name = data_user.json()['name']
     print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, task_complete, all_tasks))
+          .format(employee_name, task_done, all_tasks))
 
-    for task in list_task_complete:
+    for task in task_done_list:
         print("\t {}".format(task))
