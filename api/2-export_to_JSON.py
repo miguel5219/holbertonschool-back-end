@@ -4,7 +4,7 @@
 
 if __name__ == "__main__":
 
-    import csv
+    import json
     import requests
     from sys import argv
 
