@@ -8,13 +8,13 @@ if __name__ == "__main__":
     import requests
 
     url_todos = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}/todos").json()
+        "https://jsonplaceholder.typicode.com/users/todos").json()
     url_user = requests.get(
-        "https://jsonplaceholder.typicode.com/users/{}").json()
+        "https://jsonplaceholder.typicode.com/users").json()
 
     dictionary = {}
     for user in url_user:
-        username = ['username']
+        username = user['username']
         list_task = []
         for task in url_todos:
             if task['userId'] == user['id']:
